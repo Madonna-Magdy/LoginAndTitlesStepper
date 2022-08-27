@@ -26,7 +26,7 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
     ApiAuthorizationModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] }
+      { path: 'titles', component: FetchDataComponent, canActivate: [AuthorizeGuard] }
     ])
   ],
   providers: [

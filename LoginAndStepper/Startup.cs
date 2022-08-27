@@ -1,3 +1,4 @@
+using Autofac;
 using LoginAndStepper.Data;
 using LoginAndStepper.Models;
 using Microsoft.AspNetCore.Authentication;
@@ -22,6 +23,11 @@ namespace LoginAndStepper
         }
 
         public IConfiguration Configuration { get; }
+
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterModule(new DependencyInjection.DependencyInjection());
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
