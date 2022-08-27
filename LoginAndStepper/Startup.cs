@@ -1,12 +1,9 @@
-using Autofac;
 using LoginAndStepper.Data;
+using LoginAndStepper.Managers;
 using LoginAndStepper.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -24,11 +21,6 @@ namespace LoginAndStepper
 
         public IConfiguration Configuration { get; }
 
-        public void ConfigureContainer(ContainerBuilder builder)
-        {
-            builder.RegisterModule(new DependencyInjection.DependencyInjection());
-        }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -41,6 +33,8 @@ namespace LoginAndStepper
 
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+
+            services.AddScoped<ITitleManager, TitleManager>();
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
