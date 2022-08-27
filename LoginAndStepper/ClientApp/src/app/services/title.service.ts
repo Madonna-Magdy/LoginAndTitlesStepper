@@ -16,4 +16,12 @@ export class TitleService {
   get() {
     return this.http.get<TitleVm[]>(`${this._baseUrl}title`);
   }
+
+  post(model: TitleVm) {
+    return this.http.post<void>(`${this._baseUrl}title`, model);
+  }
+
+  put(model: TitleVm) {
+    return this.http.put<void>(`${this._baseUrl}title`, model);
+  }
 }

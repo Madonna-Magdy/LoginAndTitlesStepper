@@ -2,17 +2,70 @@
 
 <p *ngIf="!titles"><em>Loading...</em></p>
 
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="titles">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let title of titles">
-      <td>{{ title.name }}</td>
-      <td>{{ title.description }}</td>
-    </tr>
-  </tbody>
-</table>
+<span *ngFor="let i of stepIndexes">
+  <input type="button" class="btn btn-primary m-1" *ngIf="i <= maxStep" value="Step {{i}}" (click)="getStepTitles(i)">
+  <input type="button" class="btn btn-primary m-1" *ngIf="i > maxStep" value="Add Step" (click)="getStepTitles(i)" />
+</span>
+
+<div class="float-right">
+  <input type="button" class="btn btn-primary m-1" value="Add Item" (click)="isAddItem=true" />
+</div>
+
+<div *ngFor="let item of stepTitles; let i=index;">
+  <input type="button" class="btn btn-primary m-1" value="Item {{i + 1}}" (click)="item.isUpdate=true" />
+  <div *ngIf="!item.isUpdate">
+    <p>Title: {{item.name}}</p>
+    <p>Description: {{item.description}}</p>
+  </div>
+  <div *ngIf="item.isUpdate">
+    <form #updateForm="ngForm" (ngSubmit)="updateForm.valid && update(item.id, updateForm.value)">
+      <div class="content-border">
+        <div class="row mb-2">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-12 mb-1">
+                <input [(ngModel)]="item.name" placeholder="Name" name="name" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 mb-1">
+                <input [(ngModel)]="item.description" placeholder="Description" name="description" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <button type="submit" class="btn btn-success">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div *ngIf="isAddItem">
+  <form #addForm="ngForm" (ngSubmit)="addForm.valid && add(addForm.value)">
+    <div class="content-border">
+      <div class="row mb-2">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-12 mb-1">
+              <input ngModel placeholder="Name" name="name" required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 mb-1">
+              <input ngModel placeholder="Description" name="description" required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <button type="submit" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

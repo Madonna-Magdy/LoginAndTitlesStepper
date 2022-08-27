@@ -7,7 +7,7 @@ namespace LoginAndStepper.Managers
     public interface ITitleManager
     {
         Task<List<TitleVm>> GetAsync();
-        Task AddAsync();
-        Task UpdateAsync();
+        Task AddAsync(TitleVm model);
+        Task UpdateAsync(TitleVm model);
     }
 }

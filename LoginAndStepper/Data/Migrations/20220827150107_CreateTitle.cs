@@ -2,7 +2,7 @@
 
 namespace LoginAndStepper.Data.Migrations
 {
-    public partial class createtitles : Migration
+    public partial class CreateTitle : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,8 @@ namespace LoginAndStepper.Data.Migrations
                     TitleId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
+                    Description = table.Column<string>(nullable: true),
+                    StepNumber = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LoginAndStepper.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220827122400_create-titles")]
-    partial class createtitles
+    [Migration("20220827150107_CreateTitle")]
+    partial class CreateTitle
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -180,6 +180,9 @@ namespace LoginAndStepper.Data.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StepNumber")
+                        .HasColumnType("int");
 
                     b.HasKey("TitleId");
 
