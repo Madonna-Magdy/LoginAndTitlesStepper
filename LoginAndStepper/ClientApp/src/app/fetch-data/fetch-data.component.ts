@@ -19,10 +19,6 @@ export class FetchDataComponent {
     this.fillData();
   }
 
-  ngOnInit() {
-    this.addStep();
-  }
-
   fillData() {
     this.titleService.get().subscribe(result => {
       this.titles = result;
