@@ -39,5 +39,19 @@ namespace LoginAndStepper.Controllers
             await _titleManager.UpdateAsync(model);
             return Ok();
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _titleManager.DeleteAsync(id);
+            return Ok();
+        }
+
+        [HttpDelete("deleteStep/{stepNumber}")]
+        public async Task<IActionResult> DeleteStep(int stepNumber)
+        {
+            await _titleManager.DeleteStepAsync(stepNumber);
+            return Ok();
+        }
     }
 }

@@ -3,8 +3,11 @@
 <p *ngIf="!titles"><em>Loading...</em></p>
 
 <span *ngFor="let i of stepIndexes">
-  <input type="button" class="btn btn-primary m-1" *ngIf="i <= maxStep" value="Step {{i}}" (click)="getStepTitles(i)">
-  <input type="button" class="btn btn-primary m-1" *ngIf="i > maxStep" value="Add Step" (click)="getStepTitles(i)" />
+  <button class="btn btn-primary m-1" *ngIf="i <= maxStep">
+    <span (click)="getStepTitles(i)">Step {{i}}</span>
+    <strong (click)="deleteStep(i)"> - </strong>
+  </button>
+  <input type="button" class="btn btn-primary m-1" *ngIf="i > maxStep" value="Add Step" (click)="addStep(i)" />
 </span>
 
 <div class="float-right">
@@ -12,7 +15,10 @@
 </div>
 
 <div *ngFor="let item of stepTitles; let i=index;">
-  <input type="button" class="btn btn-primary m-1" value="Item {{i + 1}}" (click)="item.isUpdate=true" />
+  <button class="btn btn-primary m-1">
+    <span (click)="item.isUpdate=true">Item {{i + 1}}</span>
+    <strong (click)="delete(item.id)"> - </strong>
+  </button>
   <div *ngIf="!item.isUpdate">
     <p>Title: {{item.name}}</p>
     <p>Description: {{item.description}}</p>

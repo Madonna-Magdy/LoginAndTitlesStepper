@@ -76,5 +76,29 @@ namespace LoginAndStepper.Managers
 
             await _context.SaveChangesAsync();
         }
+
+        public async Task DeleteAsync(int id)
+        {
+            var title = await _context.Titles.FirstOrDefaultAsync(x => x.TitleId == id);
+
+            if (title == null)
+            {
+                throw new Exception("Invalid title");
+            }
+
+            _context.Titles.Remove(title);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteStepAsync(int stepNumber)
+        {
+            var titles = await _context.Titles.AsQueryable().Where(x => x.StepNumber == stepNumber).ToListAsync();
+
+            if (titles.Any())
+            {
+                _context.Titles.RemoveRange(titles);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

@@ -24,4 +24,12 @@ export class TitleService {
   put(model: TitleVm) {
     return this.http.put<void>(`${this._baseUrl}title`, model);
   }
+
+  delete(id: number) {
+    return this.http.delete<void>(`${this._baseUrl}title/${id}`);
+  }
+
+  deleteStep(stepNumber: number) {
+    return this.http.delete<void>(`${this._baseUrl}title/deleteStep/${stepNumber}`);
+  }
 }

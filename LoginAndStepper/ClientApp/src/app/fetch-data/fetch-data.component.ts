@@ -32,8 +32,10 @@ export class FetchDataComponent {
     }, error => console.error(error));
   }
 
-  addStep() {
-
+  addStep(stepNo: number) {
+    this.getStepTitles(stepNo);
+    this.maxStep = stepNo > this.maxStep ? stepNo : this.maxStep;
+    this.stepIndexes = Array(this.maxStep + 1).fill(0).map((x, i) => i + 1);
   }
 
   getStepTitles(stepNo: number) {
@@ -62,5 +64,13 @@ export class FetchDataComponent {
       stepNumber: this.selectedStep
     };
     this.titleService.put(model).subscribe(() => this.fillData(), error => console.error(error));
+  }
+
+  delete(id) {
+    this.titleService.delete(id).subscribe(() => this.fillData(), error => console.error(error));
+  }
+
+  deleteStep(stepNo) {
+    this.titleService.deleteStep(stepNo).subscribe(() => this.fillData(), error => console.error(error));
   }
 }
