@@ -24,11 +24,12 @@ export class FetchDataComponent {
       this.titles = result;
       this.maxStep = this.titles.length > 0 ? Math.max(...this.titles.map(x => x.stepNumber)) : 0;
       this.stepIndexes = Array(this.maxStep + 1).fill(0).map((x, i) => i + 1);
-      this.getStepTitles(1);
+      this.getStepTitles(this.selectedStep);
     }, error => console.error(error));
   }
 
   addStep(stepNo: number) {
+    this.isAddItem = false;
     this.getStepTitles(stepNo);
     this.maxStep = stepNo > this.maxStep ? stepNo : this.maxStep;
     this.stepIndexes = Array(this.maxStep + 1).fill(0).map((x, i) => i + 1);
@@ -67,6 +68,8 @@ export class FetchDataComponent {
   }
 
   deleteStep(stepNo) {
+    this.isAddItem = false;
+    this.selectedStep = 1;
     this.titleService.deleteStep(stepNo).subscribe(() => this.fillData(), error => console.error(error));
   }
 }
